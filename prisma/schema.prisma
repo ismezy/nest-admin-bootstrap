@@ -1,0 +1,39 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator prismaClassGenerator {
+  provider = "prisma-class-generator"
+  output   = "../_gen/primsa-class"
+  dryRun   = false
+}
+
+/// 数据字典
+model Dictionary {
+  /// 主键，自增
+  id          Int    @id @default(autoincrement())
+  /// 字典分组
+  group       String @db.VarChar(64)
+  /// 编号
+  code        String @db.VarChar(64)
+  /// 标题
+  caption     String @db.VarChar(255)
+  /// 排序
+  orderNumber Int
+  /// 所属系统编号
+  system      String @db.VarChar(64)
+}
+
+model User {
+  /// 主键,自增
+  id       Int    @id @default(autoincrement())
+  /// 用户姓名
+  userName String @db.VarChar(64)
+  /// 用户登录id
+  loginId  String @db.VarChar(64)
+}
